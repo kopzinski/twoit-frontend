@@ -1,11 +1,6 @@
 import templateUrl from './login.html'
 
 export const loginComponent = {
-  bindings: {
-    // user: '<',
-    // authenticate: '&',
-    // errorMessage: '='
-  },
   templateUrl,
   controller: class LoginComponent {
     constructor($state, UserService) {
@@ -14,11 +9,10 @@ export const loginComponent = {
       this.$state = $state
       this.UserService = UserService
       this.user = {
-        username: 'paulo',
-        password: '123123'
+        username: '',
+        password: ''
       }
       this.errorMessage = ''
-      
 
     }
     authenticate() {
