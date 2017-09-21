@@ -1,0 +1,16 @@
+<div class="places">
+  <ul class="places-list">
+    <li ng-repeat="place in $ctrl.places">
+        <span>{{ ::place.name }}</span>
+      <!-- <contact
+        contact="contact"
+        on-select="$ctrl.goToContact($event);">
+      </contact> -->
+    </li>
+  </ul>
+  <div class="places__empty"
+    ng-if="!$ctrl.places.length">
+    <!-- <i class="material-icons">face</i> -->
+    There's no one here...
+  </div>
+</div>
