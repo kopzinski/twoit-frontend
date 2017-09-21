@@ -7,27 +7,39 @@ export const placesComponent = {
   },
   templateUrl,
   controller: class PlacesComponent {
-    constructor($state, $filter, PlaceService) {
+    constructor($state, PlaceService) {
       'ngInject'
       this.$state = $state
       this.self = this
-      this.$filter = $filter
       this.PlaceService = PlaceService
-      // this.places = []
+      this.newPlaceName = ''
       this.populatePlaces()
-      
-      // this.filteredPlaces = $filter('placesFilter')(this.places, this.$filter)
     }
-    goToPlace(event) {
-      this.$state.go('place', {
-        id: event.placeId,
-      })
+    vote(placeId) {
+      this.PlaceService.voteAtPlace(placeId)
+        .then(response => {
+          console.log('response', response)
+          this.$state.go('winner')
+        }).catch(err => {
+          console.log('err', err)
+          this.errorMessage = err.data.error
+        })
+    }
+
+    add() {
+      this.PlaceService.addPlace(this.newPlaceName)
+        .then(response => {
+          console.log('response', response)
+          this.$state.go('winner')
+        }).catch(err => {
+          console.log('err', err)
+          this.errorMessage = err.data.error
+        })
     }
 
     populatePlaces() {
       return this.PlaceService.getAvailablePlaces()
-        .then((response) => {
-          console.log('response.data', response.data)
+        .then(response => {
           this.self.places = response.data || []
         })
     }

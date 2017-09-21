@@ -13,23 +13,23 @@ export const places = angular
 
     $stateProvider
       .state('places', {
-        url: '/places?filter',
+        url: '/places',
         component: 'places',
-        params: {
-          filter: {
-            value: 'none',
-          },
-        },
+        // params: {
+        //   filter: {
+        //     value: 'none',
+        //   },
+        // },
         resolve: {
           places(PlaceService) {
             'ngInject'
             return PlaceService.getAvailablePlaces()
           },
-          filter($transition$) {
-            'ngInject'
+          // filter($transition$) {
+          //   'ngInject'
 
-            return $transition$.params()
-          },
+          //   return $transition$.params()
+          // },
         },
       })
   })

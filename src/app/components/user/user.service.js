@@ -2,10 +2,10 @@ export class UserService {
   constructor($http) {
     'ngInject'
     this.$http = $http
+    this.url = 'http://localhost:3000/'
 
     this.saveUserAndToken = (user, token) => {
       console.log('saving user data', user, token)
-      // sessionStorage.user = { username: user.name, token: token }
       this.$http.defaults.headers.common.Authorization = 'JWT ' + token;
     }
   }
@@ -15,11 +15,7 @@ export class UserService {
       password: password
     }
 
-    // const config = {
-    //   'Content-Type': 'application/json'
-    // }
-
-    return this.$http.post('http://localhost:3000/login', userData)
+    return this.$http.post(this.url + 'login', userData)
       .then(response => {
         console.log('response', response)
         this.saveUserAndToken(userData, response.data.token)

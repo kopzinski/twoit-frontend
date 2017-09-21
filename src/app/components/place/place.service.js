@@ -1,28 +1,23 @@
-// import firebase from 'firebase';
-
 export class PlaceService {
   constructor($http) {
     'ngInject'
-
     this.$http = $http
-
-
+    this.url = 'http://localhost:3000/'
   }
+
   getAvailablePlaces() {
+    return this.$http.get(this.url + 'places');
+  }
 
-    //just for test the first e2e version
-    // const availablePlaces = [{
-    //     id: 1,
-    //     name: "place 1",
-    //     votes: 7
-    // },{
-    //     id: 2,
-    //     name: "place 2",
-    //     votes: 12
-    // }];
+  voteAtPlace(placeId) {
+    return this.$http.post(this.url + 'places/' + placeId + '/votes');
+  }
 
-    return this.$http.get('http://localhost:3000/places');
+  addPlace(placeName) {
+    return this.$http.post(this.url + 'places', { name: placeName });
+  }
 
-    // return availablePlaces;
+  getWinner() {
+    return this.$http.get(this.url + 'winner');
   }
 }
